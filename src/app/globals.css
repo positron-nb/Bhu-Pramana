@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+/*
+ * Bhū-Pramāṇa design system
+ * Premium government intelligence platform: deep ink, warm parchment,
+ * restrained saffron and green, thin rules, editorial serif headings.
+ */
+@theme {
+  --color-ink-950: #07101c;
+  --color-ink-900: #0c1828;
+  --color-ink-850: #10203a;
+  --color-ink-800: #15273f;
+  --color-ink-700: #1f3656;
+  --color-ink-600: #2d4a70;
+  --color-ink-500: #4a6690;
+  --color-ink-400: #7188ab;
+  --color-ink-300: #9fb0c9;
+  --color-ink-200: #cbd5e3;
+  --color-ink-100: #e6ebf2;
+
+  --color-paper: #f4efe4;
+  --color-paper-2: #ece4d3;
+  --color-paper-3: #e2d8c3;
+  --color-card: #fbf8f1;
+  --color-rule: #ddd3bf;
+  --color-rule-strong: #c3b597;
+  --color-text: #161f2e;
+  --color-muted: #5a6373;
+  --color-faint: #8b909a;
+
+  --color-saffron: #c96f16;
+  --color-saffron-deep: #9a520c;
+  --color-saffron-soft: #f6e2c4;
+  --color-green: #27744f;
+  --color-green-deep: #1c5a3c;
+  --color-green-soft: #d6e9dc;
+  --color-risk: #ae3f2a;
+  --color-risk-soft: #f4dbd3;
+  --color-amber: #b88a12;
+
+  /* pramāṇa: epistemic colour coding */
+  --color-observed: #226d86; /* pratyakṣa */
+  --color-observed-soft: #d4e8ef;
+  --color-documented: #3b4a8a; /* śabda */
+  --color-documented-soft: #dfe3f2;
+  --color-inferred: #b4640f; /* anumāna */
+  --color-inferred-soft: #f5e3c9;
+
+  --color-plum: #86456b;
+  --color-sepia: #7b5b31;
+
+  --font-sans: "Source Sans 3 Variable", "Noto Sans Devanagari Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Source Serif 4 Variable", "Noto Sans Devanagari Variable", Georgia, serif;
+  --font-mono: "Source Code Pro Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --shadow-card: 0 1px 0 rgb(22 31 46 / 0.04), 0 1px 2px rgb(22 31 46 / 0.05);
+  --shadow-float: 0 12px 32px -12px rgb(7 16 28 / 0.35), 0 2px 6px rgb(7 16 28 / 0.12);
+
+  --animate-fade-up: fade-up 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+  --animate-draw: draw 0.9s ease-out both;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+@keyframes draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.5;
+    font-feature-settings: "kern", "liga", "tnum" 0;
+  }
+  ::selection {
+    background: var(--color-saffron-soft);
+    color: var(--color-ink-900);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-saffron);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+  }
+  input[type="range"] {
+    accent-color: var(--color-saffron);
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-rule-strong) transparent;
+  }
+}
+
+@utility label-caps {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility panel {
+  background: var(--color-card);
+  border: 1px solid var(--color-rule);
+  border-radius: 6px;
+  box-shadow: var(--shadow-card);
+}
+
+@utility hairline {
+  border-color: var(--color-rule);
+}
+
+/* Parchment grain + faint survey grid used on hero surfaces */
+@utility survey-grid {
+  background-image:
+    linear-gradient(to right, rgb(159 176 201 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(159 176 201 / 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ---------- styled range slider (policy lab) ---------- */
+.lever-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 22px;
+  background: transparent;
+  cursor: pointer;
+}
+.lever-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--color-saffron) 0%, var(--color-saffron) var(--fill, 0%), var(--color-paper-3) var(--fill, 0%));
+}
+.lever-range::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-paper-3);
+}
+.lever-range::-moz-range-progress {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-saffron);
+}
+.lever-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: var(--color-card);
+  border: 2px solid var(--color-saffron-deep);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+}
+.lever-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-card);
+  border: 2px solid var(--color-saffron-deep);
+}
+.lever-range:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--color-saffron);
+  outline-offset: 2px;
+}
+
+/* ---------- MapLibre overrides ---------- */
+.maplibregl-ctrl-group {
+  background: var(--color-card) !important;
+  border: 1px solid var(--color-rule) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+.maplibregl-ctrl-attrib {
+  font-size: 10px !important;
+  background: rgb(251 248 241 / 0.85) !important;
+}
+.maplibregl-canvas:focus {
+  outline: none;
+}
+
+/* ---------- print (policy brief → PDF) ---------- */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 14mm 16mm;
+  }
+  body {
+    background: #fff !important;
+    font-size: 10.5pt;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-page {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+  .print-break {
+    break-before: page;
+  }
+  .avoid-break {
+    break-inside: avoid;
+  }
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+  .app-main {
+    padding: 0 !important;
+  }
+}
